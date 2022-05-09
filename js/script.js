@@ -53,4 +53,9 @@ const app = new Vue({
       this.activeImage = index;
     },
   },
+  created() {
+    setInterval(() => {
+      this.showNext();
+    }, 3000);
+  },
 });
