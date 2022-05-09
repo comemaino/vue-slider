@@ -40,6 +40,7 @@ const app = new Vue({
       } else {
         this.activeImage--;
       }
+      this.resetTimer();
     },
     showNext: function () {
       if (this.activeImage >= this.images.length - 1) {
@@ -47,15 +48,29 @@ const app = new Vue({
       } else {
         this.activeImage++;
       }
+      this.resetTimer();
     },
 
     showImage: function (index) {
       this.activeImage = index;
+      this.resetTimer();
+    },
+
+    stopTimer: function () {
+      clearInterval(this.timer);
+      this.timer = null;
+    },
+
+    startTimer: function () {
+      this.timer = setInterval(this.showNext, 1000);
+    },
+
+    resetTimer() {
+      this.stopTimer();
+      this.startTimer();
     },
   },
   created() {
-    setInterval(() => {
-      this.showNext();
-    }, 3000);
+    this.startTimer();
   },
 });
