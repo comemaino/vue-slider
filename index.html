@@ -11,6 +11,36 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   </head>
   <body>
+    <div id="root">
+      <div class="container">
+        <div class="items">
+          <div class="item active">
+            <img
+              :src="images[activeImage].image"
+              :alt="images[activeImage].title"
+            />
+            <div class="text">
+              <h3>{{images[activeImage].title}}</h3>
+              <p>{{images[activeImage].text}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="thumbs">
+          <div class="prev" @click="showPrev"></div>
+          <div class="next" @click="showNext"></div>
+          <!-- PER OGNI ELEMENTO IN ARRAY INSERISCO DIV CON IMMAGINE -->
+          <div
+            class="thumb"
+            :class="{active : index === activeImage}"
+            v-for="(item, index) in images"
+            @click="showImage(index)"
+          >
+            <img :src="item.image" :alt="item.title" />
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- JS -->
     <script src="js/script.js"></script>
   </body>
